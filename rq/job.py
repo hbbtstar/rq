@@ -49,6 +49,8 @@ def unpickle(pickled_string):
     """
     try:
         obj = loads(pickled_string)
+    except UnicodeDecodeError:
+        obj = loads(pickled_string, encoding='ascii')
     except Exception as e:
         raise UnpickleError('Could not unpickle', pickled_string, e)
     return obj
